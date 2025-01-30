@@ -9,18 +9,17 @@ async function handleGenerateNewShortURL(req, res) {
     shortId: shortID,
     redirectURL: body.url,
     visitedHistory: [],
+    createdBy: req.user._id,
   });
-  res.json({
-    id: shortID,
-  });
+  res.render('home', { id: shortID });
 }
 
 async function handleGetAnalytics(req, res) {
   const shortId = req.params.shortId;
-  const result = await URL.findOne({ shortId });
+  const result = await Url.findOne({ shortId });
   res.json({
-    totalClicks: result.visitedHistory.length,
-    analytics: result.visitedHistory,
+    totalClicks: result.visitHistory.length,
+    analytics: result.visitHistory,
   });
 }
 

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { type } from 'os';
 
 const urlSchema = new mongoose.Schema(
   {
@@ -16,6 +17,10 @@ const urlSchema = new mongoose.Schema(
         timestamp: { type: Number },
       },
     ],
+    createBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+    },
   },
   { timestamps: true }
 );
